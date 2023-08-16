@@ -283,10 +283,10 @@ export class PrismaVectorStore<
     query: string,
     k = 4,
     _filter: this["FilterType"] | undefined = undefined, // not used. here to make the interface compatible with the other stores
-    _callbacks: Callbacks | undefined = undefined // implement passing to embedQuery later
+    callbacks: Callbacks | undefined = undefined
   ): Promise<Document<SimilarityModel<TModel, TSelectModel>>[]> {
     const results = await this.similaritySearchVectorWithScore(
-      await this.embeddings.embedQuery(query),
+      await this.embeddings.embedQuery(query, callbacks),
       k
     );
 
@@ -297,9 +297,9 @@ export class PrismaVectorStore<
     query: string,
     k?: number,
     filter?: TFilterModel,
-    _callbacks: Callbacks | undefined = undefined // implement passing to embedQuery later
+    callbacks: Callbacks | undefined = undefined
   ) {
-    return super.similaritySearchWithScore(query, k, filter);
+    return super.similaritySearchWithScore(query, k, filter, callbacks);
   }
 
   async similaritySearchVectorWithScore(

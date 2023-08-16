@@ -1,15 +1,21 @@
 import { Embeddings, EmbeddingsParams } from "./base.js";
 
 export class FakeEmbeddings extends Embeddings {
+  lc_serializable = true;
+
+  _embeddingsType(): string {
+    return "fake";
+  }
+
   constructor(params?: EmbeddingsParams) {
     super(params ?? {});
   }
 
-  embedDocuments(documents: string[]): Promise<number[][]> {
+  _embedDocuments(documents: string[]): Promise<number[][]> {
     return Promise.resolve(documents.map(() => [0.1, 0.2, 0.3, 0.4]));
   }
 
-  embedQuery(_: string): Promise<number[]> {
+  _embedQuery(_: string): Promise<number[]> {
     return Promise.resolve([0.1, 0.2, 0.3, 0.4]);
   }
 }
@@ -29,11 +35,15 @@ export class SyntheticEmbeddings
     this.vectorSize = params?.vectorSize ?? 4;
   }
 
-  async embedDocuments(documents: string[]): Promise<number[][]> {
+  _embeddingsType(): string {
+    return "synthetic";
+  }
+
+  async _embedDocuments(documents: string[]): Promise<number[][]> {
     return Promise.all(documents.map((doc) => this.embedQuery(doc)));
   }
 
-  async embedQuery(document: string): Promise<number[]> {
+  async _embedQuery(document: string): Promise<number[]> {
     let doc = document;
 
     // Only use the letters (and space) from the document, and make them lower case

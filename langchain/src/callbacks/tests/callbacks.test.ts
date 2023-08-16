@@ -40,6 +40,10 @@ class FakeCallbackHandler extends BaseCallbackHandler {
 
   agentEnds = 0;
 
+  embeddingStarts = 0;
+
+  embeddingEnds = 0;
+
   retrieverStarts = 0;
 
   retrieverEnds = 0;
@@ -113,6 +117,23 @@ class FakeCallbackHandler extends BaseCallbackHandler {
     this.agentEnds += 1;
   }
 
+  async handleEmbeddingStart(
+    _embeddings: Serialized,
+    _texts: string[]
+  ): Promise<void> {
+    this.starts += 1;
+    this.embeddingStarts += 1;
+  }
+
+  async handleEmbeddingEnd(_vectors: number[]): Promise<void> {
+    this.ends += 1;
+    this.embeddingEnds += 1;
+  }
+
+  async handleEmbeddingError(_err: Error): Promise<void> {
+    this.errors += 1;
+  }
+
   async handleRetrieverStart(
     _retriever: Serialized,
     _query: string
@@ -149,6 +170,8 @@ class FakeCallbackHandler extends BaseCallbackHandler {
     newInstance.retrieverStarts = this.retrieverStarts;
     newInstance.retrieverEnds = this.retrieverEnds;
     newInstance.texts = this.texts;
+    newInstance.embeddingStarts = this.embeddingStarts;
+    newInstance.embeddingEnds = this.embeddingEnds;
 
     return newInstance;
   }
@@ -201,6 +224,16 @@ test("CallbackManager", async () => {
     log: "test",
   });
   await chainCb.handleAgentEnd({ returnValues: { test: "test" }, log: "test" });
+  const embeddingCbs = await manager.handleEmbeddingStart(serialized, [
+    "test1",
+    "test2",
+  ]);
+  await Promise.all(
+    embeddingCbs.map(async (embeddingCb) => {
+      await embeddingCb.handleEmbeddingEnd([1, 2, 3]);
+      await embeddingCb.handleEmbeddingError(new Error("test"));
+    })
+  );
 
   const retrieverCb = await manager.handleRetrieverStart(serialized, "test");
   await retrieverCb.handleRetrieverEnd([
@@ -209,9 +242,9 @@ test("CallbackManager", async () => {
   await retrieverCb.handleRetrieverError(new Error("test"));
 
   for (const handler of [handler1, handler2]) {
-    expect(handler.starts).toBe(5);
-    expect(handler.ends).toBe(5);
-    expect(handler.errors).toBe(4);
+    expect(handler.starts).toBe(7);
+    expect(handler.ends).toBe(7);
+    expect(handler.errors).toBe(6);
     expect(handler.retrieverStarts).toBe(1);
     expect(handler.retrieverEnds).toBe(1);
     expect(handler.llmStarts).toBe(1);
@@ -222,6 +255,8 @@ test("CallbackManager", async () => {
     expect(handler.toolStarts).toBe(2);
     expect(handler.toolEnds).toBe(1);
     expect(handler.agentEnds).toBe(1);
+    expect(handler.embeddingStarts).toBe(2);
+    expect(handler.embeddingEnds).toBe(2);
     expect(handler.texts).toBe(1);
   }
 });
@@ -338,10 +373,32 @@ test("CallbackHandler with ignoreAgent", async () => {
   expect(handler.agentEnds).toBe(0);
 });
 
+test("CallbackHandler with ignoreEmbeddings", async () => {
+  const handler = new FakeCallbackHandler({
+    ignoreEmbeddings: true,
+  });
+  const manager = new CallbackManager();
+  manager.addHandler(handler);
+  const embeddingCbs = await manager.handleEmbeddingStart(serialized, ["asdf"]);
+  await Promise.all(
+    embeddingCbs.map(async (embeddingCb) => {
+      await embeddingCb.handleEmbeddingEnd([1, 2, 3]);
+      await embeddingCb.handleEmbeddingError(new Error("test"));
+    })
+  );
+
+  expect(handler.embeddingStarts).toBe(0);
+  expect(handler.embeddingEnds).toBe(0);
+  expect(handler.starts).toBe(0);
+  expect(handler.ends).toBe(0);
+  expect(handler.errors).toBe(0);
+});
+
 test("CallbackManager with child manager", async () => {
   const chainRunId = "chainRunId";
   let llmWasCalled = false;
   let chainWasCalled = false;
+  let embeddingWasCalled = false;
   const manager = CallbackManager.fromHandlers({
     async handleLLMStart(
       _llm: Serialized,
@@ -362,6 +419,15 @@ test("CallbackManager with child manager", async () => {
       expect(parentRunId).toBe(undefined);
       chainWasCalled = true;
     },
+    async handleEmbeddingStart(
+      _embeddings: Serialized,
+      _texts: string[],
+      _runId?: string,
+      parentRunId?: string
+    ) {
+      expect(parentRunId).toBe(chainRunId);
+      embeddingWasCalled = true;
+    },
   });
   const chainCb = await manager.handleChainStart(
     serialized,
@@ -369,8 +435,10 @@ test("CallbackManager with child manager", async () => {
     chainRunId
   );
   await chainCb.getChild().handleLLMStart(serialized, ["test"]);
+  await chainCb.getChild().handleEmbeddingStart(serialized, ["test"]);
   expect(llmWasCalled).toBe(true);
   expect(chainWasCalled).toBe(true);
+  expect(embeddingWasCalled).toBe(true);
 });
 
 test("CallbackManager with child manager inherited handlers", async () => {

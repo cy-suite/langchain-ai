@@ -90,9 +90,9 @@ export class SupabaseHybridSearch extends BaseRetriever {
   protected async similaritySearch(
     query: string,
     k: number,
-    _callbacks?: Callbacks // implement passing to embedQuery later
+    callbacks?: Callbacks
   ): Promise<SearchResult[]> {
-    const embeddedQuery = await this.embeddings.embedQuery(query);
+    const embeddedQuery = await this.embeddings.embedQuery(query, callbacks);
 
     const matchDocumentsParams: SearchEmbeddingsParams = {
       query_embedding: embeddedQuery,

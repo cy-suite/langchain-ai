@@ -149,10 +149,10 @@ export abstract class VectorStore extends Serializable {
     query: string,
     k = 4,
     filter: this["FilterType"] | undefined = undefined,
-    _callbacks: Callbacks | undefined = undefined // implement passing to embedQuery later
+    callbacks: Callbacks | undefined = undefined
   ): Promise<Document[]> {
     const results = await this.similaritySearchVectorWithScore(
-      await this.embeddings.embedQuery(query),
+      await this.embeddings.embedQuery(query, callbacks),
       k,
       filter
     );
@@ -164,10 +164,10 @@ export abstract class VectorStore extends Serializable {
     query: string,
     k = 4,
     filter: this["FilterType"] | undefined = undefined,
-    _callbacks: Callbacks | undefined = undefined // implement passing to embedQuery later
+    callbacks: Callbacks | undefined = undefined
   ): Promise<[Document, number][]> {
     return this.similaritySearchVectorWithScore(
-      await this.embeddings.embedQuery(query),
+      await this.embeddings.embedQuery(query, callbacks),
       k,
       filter
     );
