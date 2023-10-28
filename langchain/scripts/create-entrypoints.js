@@ -85,6 +85,7 @@ const entrypoints = {
   "prompts/load": "prompts/load",
   // vectorstores
   "vectorstores/analyticdb": "vectorstores/analyticdb",
+  "vectorstores/azuresearch": "vectorstores/azuresearch",
   "vectorstores/base": "vectorstores/base",
   "vectorstores/cassandra": "vectorstores/cassandra",
   "vectorstores/elasticsearch": "vectorstores/elasticsearch",
