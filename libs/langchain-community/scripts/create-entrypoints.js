@@ -129,6 +129,7 @@ const entrypoints = {
   "chat_models/minimax": "chat_models/minimax",
   "chat_models/ollama": "chat_models/ollama",
   "chat_models/portkey": "chat_models/portkey",
+  "chat_models/watsonx_ai": "chat_models/watsonx_ai",
   "chat_models/yandex": "chat_models/yandex",
   // callbacks
   "callbacks/handlers/llmonitor": "callbacks/handlers/llmonitor",

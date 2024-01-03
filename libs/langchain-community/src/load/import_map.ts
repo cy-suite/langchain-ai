@@ -38,6 +38,7 @@ export * as chat_models__cloudflare_workersai from "../chat_models/cloudflare_wo
 export * as chat_models__fireworks from "../chat_models/fireworks.js";
 export * as chat_models__minimax from "../chat_models/minimax.js";
 export * as chat_models__ollama from "../chat_models/ollama.js";
+export * as chat_models__watsonx_ai from "../chat_models/watsonx_ai.js";
 export * as chat_models__yandex from "../chat_models/yandex.js";
 export * as retrievers__chaindesk from "../retrievers/chaindesk.js";
 export * as retrievers__databerry from "../retrievers/databerry.js";

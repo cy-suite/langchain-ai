@@ -63,6 +63,7 @@ export * from "langchain/chat_models/ollama";
 export * from "langchain/chat_models/minimax";
 export * from "langchain/chat_models/yandex";
 export * from "langchain/chat_models/fake";
+export * from "langchain/chat_models/watsonx_ai";
 export * from "langchain/schema";
 export * from "langchain/schema/document";
 export * from "langchain/schema/output_parser";

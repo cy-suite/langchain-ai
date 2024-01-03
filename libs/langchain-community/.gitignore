@@ -343,6 +343,9 @@ chat_models/ollama.d.ts
 chat_models/portkey.cjs
 chat_models/portkey.js
 chat_models/portkey.d.ts
+chat_models/watsonx_ai.cjs
+chat_models/watsonx_ai.js
+chat_models/watsonx_ai.d.ts
 chat_models/yandex.cjs
 chat_models/yandex.js
 chat_models/yandex.d.ts

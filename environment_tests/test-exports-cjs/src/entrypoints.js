@@ -63,6 +63,7 @@ const chat_models_ollama = require("langchain/chat_models/ollama");
 const chat_models_minimax = require("langchain/chat_models/minimax");
 const chat_models_yandex = require("langchain/chat_models/yandex");
 const chat_models_fake = require("langchain/chat_models/fake");
+const chat_models_watsonx_ai = require("langchain/chat_models/watsonx_ai");
 const schema = require("langchain/schema");
 const schema_document = require("langchain/schema/document");
 const schema_output_parser = require("langchain/schema/output_parser");

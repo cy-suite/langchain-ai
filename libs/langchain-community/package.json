@@ -1050,6 +1050,11 @@
       "import": "./chat_models/portkey.js",
       "require": "./chat_models/portkey.cjs"
     },
+    "./chat_models/watsonx_ai": {
+      "types": "./chat_models/watsonx_ai.d.ts",
+      "import": "./chat_models/watsonx_ai.js",
+      "require": "./chat_models/watsonx_ai.cjs"
+    },
     "./chat_models/yandex": {
       "types": "./chat_models/yandex.d.ts",
       "import": "./chat_models/yandex.js",
@@ -1614,6 +1619,9 @@
     "chat_models/portkey.cjs",
     "chat_models/portkey.js",
     "chat_models/portkey.d.ts",
+    "chat_models/watsonx_ai.cjs",
+    "chat_models/watsonx_ai.js",
+    "chat_models/watsonx_ai.d.ts",
     "chat_models/yandex.cjs",
     "chat_models/yandex.js",
     "chat_models/yandex.d.ts",

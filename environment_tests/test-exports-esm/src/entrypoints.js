@@ -63,6 +63,7 @@ import * as chat_models_ollama from "langchain/chat_models/ollama";
 import * as chat_models_minimax from "langchain/chat_models/minimax";
 import * as chat_models_yandex from "langchain/chat_models/yandex";
 import * as chat_models_fake from "langchain/chat_models/fake";
+import * as chat_models_watsonx_ai from "langchain/chat_models/watsonx_ai";
 import * as schema from "langchain/schema";
 import * as schema_document from "langchain/schema/document";
 import * as schema_output_parser from "langchain/schema/output_parser";
