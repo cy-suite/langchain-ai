@@ -300,6 +300,7 @@ export interface RefineDocumentsChainInput extends StuffDocumentsChainInput {
   initialResponseName?: string;
   documentVariableName?: string;
   outputKey?: string;
+  onDocumentProcessed?: (progress: number) => Promise<void>; // Optional progress emitter function
 }
 
 /**
@@ -326,6 +327,8 @@ export class RefineDocumentsChain
   initialResponseName = "existing_answer";
 
   refineLLMChain: LLMChain;
+
+  onDocumentProcessed?: (progress: number) => Promise<void>;
 
   get defaultDocumentPrompt(): BasePromptTemplate {
     return new PromptTemplate({
@@ -364,6 +367,7 @@ export class RefineDocumentsChain
     this.documentPrompt = fields.documentPrompt ?? this.documentPrompt;
     this.initialResponseName =
       fields.initialResponseName ?? this.initialResponseName;
+    this.onDocumentProcessed = fields.onDocumentProcessed;
   }
 
   /** @ignore */
@@ -439,6 +443,10 @@ export class RefineDocumentsChain
         runManager?.getChild("refine")
       );
       refineSteps.push(res);
+      if (this.onDocumentProcessed) {
+        const progress = (i / currentDocs.length).toFixed(2); // Progress calculation
+        await this.onDocumentProcessed(Number(progress)); // Emitting the progress
+      }
     }
 
     return { [this.outputKey]: res };

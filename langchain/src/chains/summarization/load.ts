@@ -36,6 +36,7 @@ export type SummarizationChainParams = BaseParams &
         refinePrompt?: BasePromptTemplate;
         refineLLM?: BaseLanguageModelInterface;
         questionPrompt?: BasePromptTemplate;
+        onDocumentProcessed?: (progress: number) => Promise<void>;
       }
   );
 
@@ -86,6 +87,7 @@ export const loadSummarizationChain = (
       refinePrompt = REFINE_PROMPT,
       refineLLM,
       questionPrompt = DEFAULT_PROMPT,
+      onDocumentProcessed,
     } = params;
     const llmChain = new LLMChain({ prompt: questionPrompt, llm, verbose });
     const refineLLMChain = new LLMChain({
@@ -98,6 +100,7 @@ export const loadSummarizationChain = (
       refineLLMChain,
       documentVariableName: "text",
       verbose,
+      onDocumentProcessed,
     });
     return chain;
   }

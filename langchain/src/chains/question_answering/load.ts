@@ -131,6 +131,7 @@ export interface RefineQAChainParams {
   refinePrompt?: BasePromptTemplate;
   refineLLM?: BaseLanguageModelInterface;
   verbose?: boolean;
+  onDocumentProcessed?: (progress: number) => Promise<void>;
 }
 
 /**
