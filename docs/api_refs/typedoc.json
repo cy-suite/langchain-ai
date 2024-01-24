@@ -200,6 +200,7 @@
     "../../langchain-core/src/chat_history.ts",
     "../../langchain-core/src/documents/index.ts",
     "../../langchain-core/src/embeddings.ts",
+    "../../langchain-core/src/graphs.ts",
     "../../langchain-core/src/example_selectors/index.ts",
     "../../langchain-core/src/language_models/base.ts",
     "../../langchain-core/src/language_models/chat_models.ts",
