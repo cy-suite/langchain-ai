@@ -16,6 +16,9 @@ export interface OptionalImportMap {
   "@langchain/community/tools/google_calendar"?:
     | typeof import("../tools/google_calendar/index.js")
     | Promise<typeof import("../tools/google_calendar/index.js")>;
+  "@langchain/community/tools/outlook"?:
+    | typeof import("../tools/outlook/index.js")
+    | Promise<typeof import("../tools/outlook/index.js")>;
   "@langchain/community/agents/toolkits/aws_sfn"?:
     | typeof import("../agents/toolkits/aws_sfn.js")
     | Promise<typeof import("../agents/toolkits/aws_sfn.js")>;
