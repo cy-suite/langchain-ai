@@ -526,6 +526,10 @@
     "experimental/prompts/handlebars.js",
     "experimental/prompts/handlebars.d.ts",
     "experimental/prompts/handlebars.d.cts",
+    "experimental/prompts/lodash.cjs",
+    "experimental/prompts/lodash.js",
+    "experimental/prompts/lodash.d.ts",
+    "experimental/prompts/lodash.d.cts",
     "experimental/tools/pyinterpreter.cjs",
     "experimental/tools/pyinterpreter.js",
     "experimental/tools/pyinterpreter.d.ts",
@@ -709,6 +713,7 @@
     "ignore": "^5.2.0",
     "ioredis": "^5.3.2",
     "jsdom": "*",
+    "lodash.template": "^4.5.0",
     "mammoth": "^1.6.0",
     "mongodb": ">=5.2.0",
     "node-llama-cpp": "*",
@@ -824,6 +829,9 @@
       "optional": true
     },
     "jsdom": {
+      "optional": true
+    },
+    "lodash.template": {
       "optional": true
     },
     "mammoth": {
@@ -2080,6 +2088,15 @@
       },
       "import": "./experimental/prompts/handlebars.js",
       "require": "./experimental/prompts/handlebars.cjs"
+    },
+    "./experimental/prompts/lodash": {
+      "types": {
+        "import": "./experimental/prompts/lodash.d.ts",
+        "require": "./experimental/prompts/lodash.d.cts",
+        "default": "./experimental/prompts/lodash.d.ts"
+      },
+      "import": "./experimental/prompts/lodash.js",
+      "require": "./experimental/prompts/lodash.cjs"
     },
     "./experimental/tools/pyinterpreter": {
       "types": {

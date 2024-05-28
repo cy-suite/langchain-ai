@@ -192,6 +192,7 @@ export const config = {
     "experimental/masking": "experimental/masking/index",
     "experimental/prompts/custom_format": "experimental/prompts/custom_format",
     "experimental/prompts/handlebars": "experimental/prompts/handlebars",
+    "experimental/prompts/lodash": "experimental/prompts/lodash",
     "experimental/tools/pyinterpreter": "experimental/tools/pyinterpreter",
     // evaluation
     evaluation: "evaluation/index",
@@ -282,6 +283,7 @@ export const config = {
     // Prevent export due to circular dependency with "load" entrypoint
     "hub",
     "experimental/prompts/handlebars",
+    "experimental/prompts/lodash",
     "experimental/tools/pyinterpreter",
   ],
   extraImportMapEntries: [
