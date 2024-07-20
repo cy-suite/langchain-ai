@@ -114,6 +114,7 @@ export const config = {
     "document_loaders/web/sort_xyz_blockchain":
       "document_loaders/web/sort_xyz_blockchain",
     "document_loaders/web/youtube": "document_loaders/web/youtube",
+    "document_loaders/web/mintbase": "document_loaders/web/mintbase",
     "document_loaders/fs/directory": "document_loaders/fs/directory",
     "document_loaders/fs/multi_file": "document_loaders/fs/multi_file",
     "document_loaders/fs/buffer": "document_loaders/fs/buffer",
