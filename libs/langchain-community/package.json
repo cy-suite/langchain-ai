@@ -39,9 +39,11 @@
     "binary-extensions": "^2.2.0",
     "expr-eval": "^2.0.2",
     "flat": "^5.0.2",
+    "htmlparser2": "^9.1.0",
     "js-yaml": "^4.1.0",
     "langchain": ">=0.2.3 <0.3.0 || >=0.3.4 <0.4.0",
     "langsmith": "^0.2.0",
+    "oracledb": "^6.7.0",
     "uuid": "^10.0.0",
     "zod": "^3.22.3",
     "zod-to-json-schema": "^3.22.5"
@@ -120,6 +122,7 @@
     "@types/jsonwebtoken": "^9",
     "@types/lodash": "^4",
     "@types/mozilla-readability": "^0.2.1",
+    "@types/oracledb": "^6",
     "@types/pdf-parse": "^1.1.1",
     "@types/pg": "^8.11.0",
     "@types/pg-copy-streams": "^1.2.2",
@@ -2791,6 +2794,15 @@
       "import": "./document_loaders/web/notionapi.js",
       "require": "./document_loaders/web/notionapi.cjs"
     },
+    "./document_loaders/web/oracleai": {
+      "types": {
+        "import": "./document_loaders/web/oracleai.d.ts",
+        "require": "./document_loaders/web/oracleai.d.cts",
+        "default": "./document_loaders/web/oracleai.d.ts"
+      },
+      "import": "./document_loaders/web/oracleai.js",
+      "require": "./document_loaders/web/oracleai.cjs"
+    },
     "./document_loaders/web/pdf": {
       "types": {
         "import": "./document_loaders/web/pdf.d.ts",
@@ -4025,6 +4037,10 @@
     "document_loaders/web/notionapi.js",
     "document_loaders/web/notionapi.d.ts",
     "document_loaders/web/notionapi.d.cts",
+    "document_loaders/web/oracleai.cjs",
+    "document_loaders/web/oracleai.js",
+    "document_loaders/web/oracleai.d.ts",
+    "document_loaders/web/oracleai.d.cts",
     "document_loaders/web/pdf.cjs",
     "document_loaders/web/pdf.js",
     "document_loaders/web/pdf.d.ts",

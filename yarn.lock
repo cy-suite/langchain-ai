@@ -11762,6 +11762,7 @@ __metadata:
     "@types/jsonwebtoken": ^9
     "@types/lodash": ^4
     "@types/mozilla-readability": ^0.2.1
+    "@types/oracledb": ^6
     "@types/pdf-parse": ^1.1.1
     "@types/pg": ^8.11.0
     "@types/pg-copy-streams": ^1.2.2
@@ -11818,6 +11819,7 @@ __metadata:
     hdb: 0.19.8
     hnswlib-node: ^3.0.0
     html-to-text: ^9.0.5
+    htmlparser2: ^9.1.0
     ibm-cloud-sdk-core: ^5.0.2
     ignore: ^5.2.0
     interface-datastore: ^8.2.11
@@ -11841,6 +11843,7 @@ __metadata:
     notion-to-md: ^3.1.0
     officeparser: ^4.0.4
     openai: "*"
+    oracledb: ^6.7.0
     pdf-parse: 1.1.1
     pg: ^8.11.0
     pg-copy-streams: ^6.0.5
@@ -19611,6 +19614,15 @@ __metadata:
   version: 2019.3.0
   resolution: "@types/offscreencanvas@npm:2019.3.0"
   checksum: 006361d170aac80925b16a8c0421d5ee7bfe6acb5cd6b22407e2c28be091becc7de5ba1fd21293a1fdff70648918d9c035001ffafd4d6c49d1c5a22dab88ed0d
+  languageName: node
+  linkType: hard
+
+"@types/oracledb@npm:^6":
+  version: 6.5.2
+  resolution: "@types/oracledb@npm:6.5.2"
+  dependencies:
+    "@types/node": "*"
+  checksum: 02abec363e8ca1455310e930826095461c2b1e01ca7031aed99f5f0a029ee236a0a4df9c5e6d97e8757ef8e3e8531a1ce906cd65636acf355e72527bb96d4003
   languageName: node
   linkType: hard
 
@@ -30294,6 +30306,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"htmlparser2@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "htmlparser2@npm:9.1.0"
+  dependencies:
+    domelementtype: ^2.3.0
+    domhandler: ^5.0.3
+    domutils: ^3.1.0
+    entities: ^4.5.0
+  checksum: e5f8d5193967e4a500226f37bdf2c0f858cecb39dde14d0439f24bf2c461a4342778740d988fbaba652b0e4cb6052f7f2e99e69fc1a329a86c629032bb76e7c8
+  languageName: node
+  linkType: hard
+
 "http-cache-semantics@npm:^4.0.0, http-cache-semantics@npm:^4.1.0, http-cache-semantics@npm:^4.1.1":
   version: 4.1.1
   resolution: "http-cache-semantics@npm:4.1.1"
@@ -36372,6 +36396,13 @@ __metadata:
     string-width: ^7.2.0
     strip-ansi: ^7.1.0
   checksum: 81b9a2627a687c2b16fa08b0ae0b3641b320bdbeca831eb323df0cbb1e5ddc096b94391ff342839a1db47f5a895cebb2a8d06c319a5d935fc48628f35a036107
+  languageName: node
+  linkType: hard
+
+"oracledb@npm:^6.7.0":
+  version: 6.7.0
+  resolution: "oracledb@npm:6.7.0"
+  checksum: f4424e30afc85256a09a23a0772e59ce551a6cbc9d12559d572a944e1278d9420fc537b5783617955e187904a6f6319ed58ef8ae7319253cdcebb01a15d8250a
   languageName: node
   linkType: hard
 
