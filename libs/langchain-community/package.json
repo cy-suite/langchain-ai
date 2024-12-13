@@ -77,6 +77,7 @@
     "@google-ai/generativelanguage": "^2.5.0",
     "@google-cloud/storage": "^7.7.0",
     "@gradientai/nodejs-sdk": "^1.2.0",
+    "@hashgraph/sdk": "^2.53.0",
     "@huggingface/inference": "^2.6.4",
     "@ibm-cloud/watsonx-ai": "^1.3.0",
     "@jest/globals": "^29.5.0",
@@ -247,6 +248,7 @@
     "@google-ai/generativelanguage": "*",
     "@google-cloud/storage": "^6.10.1 || ^7.7.0",
     "@gradientai/nodejs-sdk": "^1.2.0",
+    "@hashgraph/sdk": "^2.53.0",
     "@huggingface/inference": "^2.6.4",
     "@ibm-cloud/watsonx-ai": "*",
     "@lancedb/lancedb": "^0.12.0",
@@ -423,6 +425,9 @@
       "optional": true
     },
     "@gradientai/nodejs-sdk": {
+      "optional": true
+    },
+    "@hashgraph/sdk": {
       "optional": true
     },
     "@huggingface/inference": {
@@ -882,6 +887,15 @@
       },
       "import": "./tools/google_routes.js",
       "require": "./tools/google_routes.cjs"
+    },
+    "./tools/hedera": {
+      "types": {
+        "import": "./tools/hedera.d.ts",
+        "require": "./tools/hedera.d.cts",
+        "default": "./tools/hedera.d.ts"
+      },
+      "import": "./tools/hedera.js",
+      "require": "./tools/hedera.cjs"
     },
     "./tools/ifttt": {
       "types": {
@@ -3195,6 +3209,10 @@
     "tools/google_routes.js",
     "tools/google_routes.d.ts",
     "tools/google_routes.d.cts",
+    "tools/hedera.cjs",
+    "tools/hedera.js",
+    "tools/hedera.d.ts",
+    "tools/hedera.d.cts",
     "tools/ifttt.cjs",
     "tools/ifttt.js",
     "tools/ifttt.d.ts",
