@@ -31,6 +31,7 @@ const DEFAULTS = {
   mistralParams: `{\n  model: "mistral-large-latest",\n  temperature: 0\n}`,
   groqParams: `{\n  model: "llama-3.3-70b-versatile",\n  temperature: 0\n}`,
   vertexParams: `{\n  model: "gemini-1.5-flash",\n  temperature: 0\n}`,
+  azureOpenAIParams: `{\n  azure_endpoint=process.env.AZURE_OPENAI_ENDPOINT,\n  azure_deployment=process.env.AZURE_OPENAI_DEPLOYMENT_NAME,\n  openai_api_version=process.env.AZURE_OPENAI_API_VERSION\n}`,
 };
 
 const MODELS_WSO = ["openai", "anthropic", "mistral", "groq", "vertex"];
@@ -46,6 +47,7 @@ const MODELS_WSO = ["openai", "anthropic", "mistral", "groq", "vertex"];
  *
  * @property {boolean} [hideOpenai] - Whether or not to hide OpenAI chat model.
  * @property {boolean} [hideAnthropic] - Whether or not to hide Anthropic chat model.
+ * @property {boolean} [hideAzureOpenAI] - Whether or not to hide Microsoft Azure OpenAI chat model.
  * @property {boolean} [hideFireworks] - Whether or not to hide Fireworks chat model.
  * @property {boolean} [hideMistral] - Whether or not to hide Mistral chat model.
  * @property {boolean} [hideGroq] - Whether or not to hide Mistral chat model.
@@ -69,10 +71,13 @@ export default function ChatModelTabs(props) {
   const mistralParams = props.mistralParams ?? DEFAULTS.mistralParams;
   const groqParams = props.groqParams ?? DEFAULTS.groqParams;
   const vertexParams = props.vertexParams ?? DEFAULTS.vertexParams;
+  const azureOpenAIParams =
+    props.azureOpenAIParams ?? DEFAULTS.azureOpenAIParams;
   const providers = props.providers ?? [
     "groq",
     "openai",
     "anthropic",
+    "azureOpenAI",
     "fireworks",
     "mistral",
     "vertex",
@@ -94,6 +99,14 @@ export default function ChatModelTabs(props) {
       text: `import { ChatAnthropic } from "@langchain/anthropic";\n\nconst ${llmVarName} = new ChatAnthropic(${anthropicParams});`,
       envs: `ANTHROPIC_API_KEY=your-api-key`,
       dependencies: "@langchain/anthropic",
+    },
+    azure: {
+      value: "azureOpenAI",
+      label: "Azure OpenAI",
+      default: false,
+      text: `import { AzureChatOpenAI } from "@langchain/openai";\n\nconst ${llmVarName} = new AzureChatOpenAI(${azureOpenAIParams});`,
+      envs: `AZURE_OPENAI_API_KEY=your-api-key`,
+      dependencies: "@langchain/openai",
     },
     fireworks: {
       value: "fireworks",
