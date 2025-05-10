@@ -189,3 +189,58 @@ test("Can properly format anthropic messages when given two tool results", async
     system: undefined,
   });
 });
+
+test("Can properly format anthropic messages when tool_result has no content", async () => {
+  const messageHistory = [
+    new HumanMessage("What is the weather in SF? Also, what is 2 + 2?"),
+    new AIMessage({
+      content: "",
+      tool_calls: [
+        {
+          name: "get_weather",
+          id: "weather_call",
+          args: {
+            location: "SF",
+          },
+        },
+        {
+          name: "calculator",
+          id: "calculator_call",
+          args: {
+            expression: "2 + 2",
+          },
+        },
+      ],
+    }),
+    new ToolMessage({
+      name: "get_weather",
+      tool_call_id: "weather_call",
+      content: "It is currently 24 degrees with hail in San Francisco.",
+    }),
+    new ToolMessage({
+      name: "calculator",
+      tool_call_id: "calculator_call",
+      // @ts-expect-error this could happen in runtime for tool_result message
+      content: undefined,
+    }),
+  ];
+
+  const formattedMessages = _convertMessagesToAnthropicPayload(messageHistory);
+
+  expect(formattedMessages).toHaveProperty("messages");
+  expect(formattedMessages.messages).toContainEqual({
+    role: "user",
+    content: [
+      {
+        type: "tool_result",
+        content: "It is currently 24 degrees with hail in San Francisco.",
+        tool_use_id: "weather_call",
+      },
+      {
+        type: "tool_result",
+        content: "", // default value when content is undefined
+        tool_use_id: "calculator_call",
+      },
+    ],
+  });
+});
